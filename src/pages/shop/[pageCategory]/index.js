@@ -119,41 +119,41 @@ export default Index;
 export async function getServerSideProps({ params }) {
   const { pageCategory } = params;
 
-  const query = qs.stringify(
-    {
-      filters: {
-        pageCategory: pageCategory,
-        showOnBanner: true,
-      },
-      populate: {
-        image: true,
-      },
-    },
-    {
-      encodeValuesOnly: true,
-    },
-  );
-
-  // const response = await fetch(
-  //   `${process.env.API_URL}/api/products/search?search=&pmin=1&pmax=9999&brands=&sale=&category=&pageCategory=${pageCategory}&subcat=&size=&currentPage=1&sorting=Sort By&clearance=false&newproduct=false`,
+  // const query = qs.stringify(
+  //   {
+  //     filters: {
+  //       pageCategory: pageCategory,
+  //       showOnBanner: true,
+  //     },
+  //     populate: {
+  //       image: true,
+  //     },
+  //   },
+  //   {
+  //     encodeValuesOnly: true,
+  //   },
   // );
-  // const pageResponseJson = await response.json();
 
-  const pageBannerResponse = await fetch(`${process.env.API_URL}/api/products?${query}`);
+  // // const response = await fetch(
+  // //   `${process.env.API_URL}/api/products/search?search=&pmin=1&pmax=9999&brands=&sale=&category=&pageCategory=${pageCategory}&subcat=&size=&currentPage=1&sorting=Sort By&clearance=false&newproduct=false`,
+  // // );
+  // // const pageResponseJson = await response.json();
 
-  const pageBannerResponseJson = await pageBannerResponse.json();
+  // const pageBannerResponse = await fetch(`${process.env.API_URL}/api/products?${query}`);
 
-  if (!data) {
-    return {
-      notFound: true,
-    };
-  }
+  // const pageBannerResponseJson = await pageBannerResponse.json();
+
+  // if (!data) {
+  //   return {
+  //     notFound: true,
+  //   };
+  // }
 
   return {
     props: {
       // pageData: pageResponseJson,
       pageCategory,
-      pageBannerdata: pageBannerResponseJson.data,
+      // pageBannerdata: pageBannerResponseJson.data,
     },
   };
 }
