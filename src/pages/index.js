@@ -34,13 +34,13 @@ const Home = ({
       <SectionBanner bannerData={bannerData} />
       <PopularCategorySection sectionPopularCategoryData={sectionPopularCategoryData} />
       <SectionBrands sectionBrandData={sectionBrandData} />
-      <NewArrivalsSlider newProductsData={newProductsData} />
+      {/* <NewArrivalsSlider newProductsData={newProductsData} />
       <SecondSectionBanner secondBannerData={secondBannerData} />
       <SectionCategory
         sectionCategoryData={
           sectionCategoryData?.data && sectionCategoryData?.data[0]?.attributes?.category
         }
-      />
+      /> */}
       {/* <ClearanseSlider clearenceData={clearenceData} /> */}
     </>
   );
@@ -81,43 +81,43 @@ export async function getServerSideProps() {
       },
     });
 
-    const footerResponse = await fetch(`${process.env.API_URL}/api/layout-footers`);
-    const headerResponse = await fetch(`${process.env.API_URL}/api/layout-header`);
+    // const footerResponse = await fetch(`${process.env.API_URL}/api/layout-footers`);
+    // const headerResponse = await fetch(`${process.env.API_URL}/api/layout-header`);
     const bannerResponse = await fetch(`${process.env.API_URL}/api/section-banners?populate=*`);
-    const secondBannerResponse = await fetch(
-      `${process.env.API_URL}/api/second-section-banners?populate=*`,
-    );
+    // const secondBannerResponse = await fetch(
+    //   `${process.env.API_URL}/api/second-section-banners?populate=*`,
+    // );
     const popularCategoryResponse = await fetch(
       `${process.env.API_URL}/api/section-popular-categories?${sectionPopularCategoryQuery}`,
     );
-    const newProductsResponse = await fetch(`${process.env.API_URL}/api/products/newarrivals`);
-    const clearenceResponse = await fetch(`${process.env.API_URL}/api/products?${query}`);
-    const sectionCategoryResponse = await fetch(
-      `${process.env.API_URL}/api/section-categories?${sectionCategoryQuery}`,
-    );
+    // const newProductsResponse = await fetch(`${process.env.API_URL}/api/products/newarrivals`);
+    // const clearenceResponse = await fetch(`${process.env.API_URL}/api/products?${query}`);
+    // const sectionCategoryResponse = await fetch(
+    //   `${process.env.API_URL}/api/section-categories?${sectionCategoryQuery}`,
+    // );
 
     const sectionBrandResponse = await fetch(
       `${process.env.API_URL}/api/section-brands?${sectionBrandQuery}`,
     );
-    const footerDataJson = await footerResponse.json();
-    const headerDataJson = await headerResponse.json();
+    // const footerDataJson = await footerResponse.json();
+    // const headerDataJson = await headerResponse.json();
     const bannerDataJson = await bannerResponse?.json();
-    const secondBannerDataJson = await secondBannerResponse?.json();
+    // const secondBannerDataJson = await secondBannerResponse?.json();
     const popularCategoryDataJson = await popularCategoryResponse?.json();
-    const newProductsJson = await newProductsResponse?.json();
-    const clearenceDataJson = await clearenceResponse?.json();
-    const sectionCategoryDataJson = await sectionCategoryResponse?.json();
+    // const newProductsJson = await newProductsResponse?.json();
+    // const clearenceDataJson = await clearenceResponse?.json();
+    // const sectionCategoryDataJson = await sectionCategoryResponse?.json();
     const sectionBrandDataJson = await sectionBrandResponse?.json();
 
     return {
       props: {
-        footerData: footerDataJson,
-        headerData: headerDataJson,
+        // footerData: footerDataJson,
+        // headerData: headerDataJson,
+        // newProductsData: newProductsJson?.data?.attributes?.sortedProducts,
+        // clearenceData: clearenceDataJson?.data,
+        // sectionCategoryData: sectionCategoryDataJson,
+        // secondBannerData: secondBannerDataJson?.data,
         bannerData: bannerDataJson.data,
-        newProductsData: newProductsJson?.data?.attributes?.sortedProducts,
-        clearenceData: clearenceDataJson?.data,
-        sectionCategoryData: sectionCategoryDataJson,
-        secondBannerData: secondBannerDataJson?.data,
         sectionPopularCategoryData: popularCategoryDataJson?.data,
         sectionBrandData: sectionBrandDataJson,
       },
@@ -125,13 +125,13 @@ export async function getServerSideProps() {
   } catch (error) {
     return {
       props: {
-        footerData: null,
-        headerData: null,
+        // footerData: null,
+        // headerData: null,
         bannerData: null,
-        newProductsData: null,
-        clearenceData: null,
-        sectionCategoryData: null,
-        secondBannerData: null,
+        // newProductsData: null,
+        // clearenceData: null,
+        // sectionCategoryData: null,
+        // secondBannerData: null,
         sectionPopularCategoryData: null,
         sectionBrandData: null,
       },
