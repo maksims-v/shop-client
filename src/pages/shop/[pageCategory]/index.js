@@ -140,7 +140,14 @@ export async function getServerSideProps({ params }) {
   // const pageResponseJson = await response.json();
 
   const pageBannerResponse = await fetch(`${process.env.API_URL}/api/products?${query}`);
+
   const pageBannerResponseJson = await pageBannerResponse.json();
+
+  if (!data) {
+    return {
+      notFound: true,
+    };
+  }
 
   return {
     props: {
