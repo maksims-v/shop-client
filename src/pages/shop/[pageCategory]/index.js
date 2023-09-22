@@ -45,8 +45,6 @@ const Index = ({ pageCategory, pageBannerdata, pageData }) => {
   const total = useSelector((state) => state.searchPageSlice.metaData.total);
   const mobile = useSelector((state) => state.searchPageSlice.mobile);
 
-  console.log(pageData);
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [currentPage, sortValue]);
@@ -136,17 +134,17 @@ export async function getServerSideProps({ params }) {
     },
   );
 
-  const response = await fetch(
-    `${process.env.API_URL}/api/products/search?search=&pmin=1&pmax=9999&brands=&sale=&category=&pageCategory=${pageCategory}&subcat=&size=&currentPage=1&sorting=Sort By&clearance=false&newproduct=false`,
-  );
-  const pageResponseJson = await response.json();
+  // const response = await fetch(
+  //   `${process.env.API_URL}/api/products/search?search=&pmin=1&pmax=9999&brands=&sale=&category=&pageCategory=${pageCategory}&subcat=&size=&currentPage=1&sorting=Sort By&clearance=false&newproduct=false`,
+  // );
+  // const pageResponseJson = await response.json();
 
   const pageBannerResponse = await fetch(`${process.env.API_URL}/api/products?${query}`);
   const pageBannerResponseJson = await pageBannerResponse.json();
 
   return {
     props: {
-      pageData: pageResponseJson,
+      // pageData: pageResponseJson,
       pageCategory,
       pageBannerdata: pageBannerResponseJson.data,
     },
