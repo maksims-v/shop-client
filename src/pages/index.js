@@ -24,10 +24,10 @@ const Home = ({
 }) => {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(setHeaderData(headerData));
-    dispatch(setFooterData(footerData));
-  }, []);
+  // useEffect(() => {
+  //   dispatch(setHeaderData(headerData));
+  //   dispatch(setFooterData(footerData));
+  // }, []);
 
   return (
     <>
