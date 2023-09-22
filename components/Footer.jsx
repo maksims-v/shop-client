@@ -18,7 +18,7 @@ const Footer = () => {
       pt="40px"
       mt={mobile ? '20px' : '50px'}>
       <Container maxWidth="md" sx={{ height: '100%' }}>
-        {status === 'resolved' && (
+        {data && (
           <Box
             sx={{
               display: 'flex',

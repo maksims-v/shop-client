@@ -33,6 +33,12 @@ const setError = (state, action) => {
 export const footerDataSlice = createSlice({
   name: 'footerData',
   initialState,
+  reducers: {
+    setFooterData(state, action) {
+      console.log(action.payload?.data[0]?.attributes);
+      state.data = action.payload?.data[0]?.attributes;
+    },
+  },
   extraReducers: {
     [getFooterData.pending]: (state, action) => {
       state.status = 'loading';
@@ -46,5 +52,7 @@ export const footerDataSlice = createSlice({
     [getFooterData.rejected]: setError,
   },
 });
+
+export const { setFooterData } = footerDataSlice.actions;
 
 export default footerDataSlice.reducer;

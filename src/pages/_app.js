@@ -25,7 +25,7 @@ const store = configureStore({
   },
 });
 
-const App = ({ Component, pageProps: { session, ...pageProps } }) => {
+const App = ({ Component, pageProps: { session, ...pageProps }, headerData }) => {
   return (
     <ThemeProvider theme={theme}>
       <Provider store={store}>

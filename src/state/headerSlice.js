@@ -35,7 +35,7 @@ export const headerDataSlice = createSlice({
   initialState,
   reducers: {
     setHeaderData(state, action) {
-      state.data = action.payload;
+      state.data = action.payload?.data[0].attributes.linkList;
     },
   },
   extraReducers: {
@@ -51,5 +51,7 @@ export const headerDataSlice = createSlice({
     [getHeaderData.rejected]: setError,
   },
 });
+
+export const { setHeaderData } = headerDataSlice.actions;
 
 export default headerDataSlice.reducer;

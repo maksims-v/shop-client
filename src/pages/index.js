@@ -6,8 +6,14 @@ import ClearanseSlider from 'components/ClearanseSlider';
 import SectionCategory from 'components/SectionCategory';
 import SecondSectionBanner from 'components/SecondSectionBanner';
 import SectionBrands from 'components/SectionBrands';
+import { useDispatch } from 'react-redux';
+import { setHeaderData } from '@/state/headerSlice';
+import { setFooterData } from '@/state/footerSlice';
+import { useEffect } from 'react';
 
 const Home = ({
+  headerData,
+  footerData,
   bannerData,
   newProductsData,
   clearenceData,
@@ -16,6 +22,13 @@ const Home = ({
   sectionPopularCategoryData,
   sectionBrandData,
 }) => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setHeaderData(headerData));
+    dispatch(setFooterData(footerData));
+  }, []);
+
   return (
     <>
       <SectionBanner bannerData={bannerData} />
@@ -35,7 +48,7 @@ const Home = ({
 
 export default Home;
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   try {
     const query = qs.stringify({
       filters: {
@@ -68,6 +81,8 @@ export async function getStaticProps() {
       },
     });
 
+    const footerResponse = await fetch(`${process.env.API_URL}/api/layout-footers`);
+    const headerResponse = await fetch(`${process.env.API_URL}/api/layout-header`);
     const bannerResponse = await fetch(`${process.env.API_URL}/api/section-banners?populate=*`);
     const secondBannerResponse = await fetch(
       `${process.env.API_URL}/api/second-section-banners?populate=*`,
@@ -84,7 +99,8 @@ export async function getStaticProps() {
     const sectionBrandResponse = await fetch(
       `${process.env.API_URL}/api/section-brands?${sectionBrandQuery}`,
     );
-
+    const footerDataJson = await footerResponse.json();
+    const headerDataJson = await headerResponse.json();
     const bannerDataJson = await bannerResponse?.json();
     const secondBannerDataJson = await secondBannerResponse?.json();
     const popularCategoryDataJson = await popularCategoryResponse?.json();
@@ -95,6 +111,8 @@ export async function getStaticProps() {
 
     return {
       props: {
+        footerData: footerDataJson,
+        headerData: headerDataJson,
         bannerData: bannerDataJson.data,
         newProductsData: newProductsJson?.data?.attributes?.sortedProducts,
         clearenceData: clearenceDataJson?.data,
@@ -107,6 +125,8 @@ export async function getStaticProps() {
   } catch (error) {
     return {
       props: {
+        footerData: null,
+        headerData: null,
         bannerData: null,
         newProductsData: null,
         clearenceData: null,
