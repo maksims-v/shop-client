@@ -11,25 +11,23 @@ import { setHeaderData } from '@/state/headerSlice';
 import { setFooterData } from '@/state/footerSlice';
 import { useEffect } from 'react';
 
-const Home = (
-  {
-    // headerData,
-    // footerData,
-    // bannerData,
-    // newProductsData,
-    // clearenceData,
-    // sectionCategoryData,
-    // secondBannerData,
-    // sectionPopularCategoryData,
-    // sectionBrandData,
-  },
-) => {
+const Home = ({
+  pages,
+  // headerData,
+  // footerData,
+  // bannerData,
+  // newProductsData,
+  // clearenceData,
+  // sectionCategoryData,
+  // secondBannerData,
+  // sectionPopularCategoryData,
+  // sectionBrandData,
+}) => {
   const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   dispatch(setHeaderData(headerData));
-  //   dispatch(setFooterData(footerData));
-  // }, []);
+  useEffect(() => {
+    dispatch(setHeaderData(pages));
+    // dispatch(setFooterData(footerData));
+  }, []);
 
   return (
     <>
@@ -49,6 +47,21 @@ const Home = (
 };
 
 export default Home;
+
+export const getStaticProps = async () => {
+  const response = await fetch(`${process.env.API_URL}/api/layout-header`);
+  const data = await response.json();
+
+  if (!data) {
+    return {
+      notFound: true,
+    };
+  }
+
+  return {
+    props: { pages: data },
+  };
+};
 
 // export async function getServerSideProps() {
 //   try {

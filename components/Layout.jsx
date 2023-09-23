@@ -28,7 +28,7 @@ const Layout = ({ children }) => {
     const jwt = Cookies.get('jwt');
     const basket = localStorage.getItem('cart');
     if (basket) dispatch(addToBasket(JSON.parse(basket)));
-    dispatch(getHeaderData());
+    // dispatch(getHeaderData());
     dispatch(getFooterData());
     if (jwt) {
       dispatch(getUserFromLocalCookie(jwt));
