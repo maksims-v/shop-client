@@ -26,6 +26,7 @@ import RelatedProductsSlider from 'components/RelatedProductsSlider';
 import DoneIcon from '@mui/icons-material/Done';
 import { getProductData } from '@/state/productPageSlice';
 import ProductPageMobileVersion from 'components/mobileVersionPage/ProductPageMobileVersion';
+import { useRouter } from 'next/router';
 
 const onHoverLine = {
   display: 'inline-block',
@@ -49,8 +50,11 @@ const onHoverLine = {
   },
 };
 
-const ItemDetails = ({ slug, pageCategory, category, subcategory }) => {
+const ItemDetails = () => {
   const dispatch = useDispatch();
+  const router = useRouter();
+
+  const { category, pageCategory, subcategory, slug } = router.query;
 
   const basket = useSelector((state) => state.shoppingCartSlice.basket);
   const mobile = useSelector((state) => state.searchPageSlice.mobile);
@@ -451,6 +455,19 @@ export default ItemDetails;
 
 // export async function getServerSideProps({ params, query }) {
 //   const { slug, pageCategory, category, subcategory } = params;
+
+//   const slugQuery = qs.stringify({
+//     filters: { slug: value.slug },
+//     populate: { image: true, size: true, color: true, id: true },
+//   });
+
+//   const response = await fetch(`${process.env.API_URL}/api/products?${slugQuery}`);
+
+//   if (!response.ok) {
+//     throw new Error('Server Error!');
+//   }
+
+//   const data = response.json();
 
 //   return { props: { slug, pageCategory, category, subcategory } };
 // }
