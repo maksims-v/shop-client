@@ -29,7 +29,7 @@ const Layout = ({ children }) => {
     const basket = localStorage.getItem('cart');
     if (basket) dispatch(addToBasket(JSON.parse(basket)));
     // dispatch(getHeaderData());
-    dispatch(getFooterData());
+    // dispatch(getFooterData());
     if (jwt) {
       dispatch(getUserFromLocalCookie(jwt));
     }

@@ -39,7 +39,7 @@ const onHoverLine = {
   },
 };
 
-const Index = ({ pageBannerdata }) => {
+const Index = () => {
   const dispatch = useDispatch();
   const [bannerdata, setBannerData] = useState();
 
@@ -51,14 +51,6 @@ const Index = ({ pageBannerdata }) => {
   const sortValue = useSelector((state) => state.searchPageSlice.sortValue);
   const total = useSelector((state) => state.searchPageSlice.metaData.total);
   const mobile = useSelector((state) => state.searchPageSlice.mobile);
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [currentPage, sortValue]);
-
-  useEffect(() => {
-    dispatch(clearAllFilters());
-  }, [pageCategory]);
 
   async function getBanner() {
     const query = qs.stringify(
@@ -80,6 +72,14 @@ const Index = ({ pageBannerdata }) => {
     const pageBannerResponseJson = await pageBannerResponse.json();
     setBannerData(pageBannerResponseJson);
   }
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [currentPage, sortValue]);
+
+  useEffect(() => {
+    dispatch(clearAllFilters());
+  }, [pageCategory]);
 
   useEffect(() => {
     dispatch(search({ pageCategory }));

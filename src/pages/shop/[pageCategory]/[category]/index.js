@@ -1,6 +1,6 @@
 const qs = require('qs');
 import { Box, Breadcrumbs, Typography } from '@mui/material';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { search, clearAllFilters, setDiscounts } from '@/state/searchPageSlice';
 import ProductList from 'components/ProductList';
@@ -37,8 +37,9 @@ const onHoverLine = {
   },
 };
 
-const Category = ({ pageBannerData }) => {
+const Category = () => {
   const dispatch = useDispatch();
+  const [bannerdata, setBannerData] = useState();
 
   const router = useRouter();
   const { category, pageCategory } = router.query;
@@ -48,6 +49,40 @@ const Category = ({ pageBannerData }) => {
   const sortValue = useSelector((state) => state.searchPageSlice.sortValue);
   const total = useSelector((state) => state.searchPageSlice.metaData.total);
   const mobile = useSelector((state) => state.searchPageSlice.mobile);
+
+  async function getBanner() {
+    const query = qs.stringify(
+      {
+        filters: {
+          pageCategory: pageCategory,
+          $or: [
+            {
+              category: {
+                $eqi: category,
+              },
+            },
+            {
+              equipmentCategory: {
+                $eqi: category,
+              },
+            },
+          ],
+          showOnCategoryBanner: true,
+        },
+        populate: {
+          image: true,
+        },
+      },
+      {
+        encodeValuesOnly: true,
+      },
+    );
+
+    const pageBannerResponse = await fetch(`${process.env.API_URL}/api/products?${query}`);
+
+    const pageBannerResponseJson = await pageBannerResponse.json();
+    setBannerData(pageBannerResponseJson);
+  }
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -59,6 +94,7 @@ const Category = ({ pageBannerData }) => {
 
   useEffect(() => {
     dispatch(search({ pageCategory, category }));
+    getBanner();
   }, [searchFlag, pageCategory, category]);
 
   const handleChange = (event) => {
@@ -116,7 +152,7 @@ const Category = ({ pageBannerData }) => {
               <SortingByPriceAndName />
             </Box>
           )}
-          <ProductPageBanner pageBannerdata={pageBannerData} />
+          <ProductPageBanner pageBannerdata={bannerdata} />
           <ProductList />
         </Box>
       </Box>
@@ -125,11 +161,3 @@ const Category = ({ pageBannerData }) => {
 };
 
 export default Category;
-
-// export async function getServerSideProps({ params }) {
-//   const { pageCategory, category } = params;
-
-//   const pageBannerResponseJson = await pageBannerResponse.json();
-
-//   return { props: { pageCategory, category, pageBannerData: pageBannerResponseJson.data } };
-// }
