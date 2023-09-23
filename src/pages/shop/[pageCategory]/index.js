@@ -116,44 +116,44 @@ const Index = ({ pageCategory, pageBannerdata, pageData }) => {
 
 export default Index;
 
-// export async function getServerSideProps({ params }) {
-//   const { pageCategory } = params;
+export async function getServerSideProps({ params }) {
+  const { pageCategory } = params;
 
-//   // const query = qs.stringify(
-//   //   {
-//   //     filters: {
-//   //       pageCategory: pageCategory,
-//   //       showOnBanner: true,
-//   //     },
-//   //     populate: {
-//   //       image: true,
-//   //     },
-//   //   },
-//   //   {
-//   //     encodeValuesOnly: true,
-//   //   },
-//   // );
+  //   // const query = qs.stringify(
+  //   //   {
+  //   //     filters: {
+  //   //       pageCategory: pageCategory,
+  //   //       showOnBanner: true,
+  //   //     },
+  //   //     populate: {
+  //   //       image: true,
+  //   //     },
+  //   //   },
+  //   //   {
+  //   //     encodeValuesOnly: true,
+  //   //   },
+  //   // );
 
-//   // // const response = await fetch(
-//   // //   `${process.env.API_URL}/api/products/search?search=&pmin=1&pmax=9999&brands=&sale=&category=&pageCategory=${pageCategory}&subcat=&size=&currentPage=1&sorting=Sort By&clearance=false&newproduct=false`,
-//   // // );
-//   // // const pageResponseJson = await response.json();
+  const response = await fetch(
+    `${process.env.API_URL}/api/products/search?search=&pmin=1&pmax=9999&brands=&sale=&category=&pageCategory=${pageCategory}&subcat=&size=&currentPage=1&sorting=Sort By&clearance=false&newproduct=false`,
+  );
+  const pageResponseJson = await response.json();
 
-//   // const pageBannerResponse = await fetch(`${process.env.API_URL}/api/products?${query}`);
+  //   // const pageBannerResponse = await fetch(`${process.env.API_URL}/api/products?${query}`);
 
-//   // const pageBannerResponseJson = await pageBannerResponse.json();
+  //   // const pageBannerResponseJson = await pageBannerResponse.json();
 
-//   // if (!data) {
-//   //   return {
-//   //     notFound: true,
-//   //   };
-//   // }
+  if (!data) {
+    return {
+      notFound: true,
+    };
+  }
 
-//   return {
-//     props: {
-//       // pageData: pageResponseJson,
-//       pageCategory,
-//       // pageBannerdata: pageBannerResponseJson.data,
-//     },
-//   };
-// }
+  return {
+    props: {
+      pageData: pageResponseJson,
+      pageCategory,
+      // pageBannerdata: pageBannerResponseJson.data,
+    },
+  };
+}
