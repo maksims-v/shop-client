@@ -121,39 +121,39 @@ const Category = ({ pageCategory, category, pageBannerData }) => {
 
 export default Category;
 
-export async function getServerSideProps({ params }) {
-  const { pageCategory, category } = params;
+// export async function getServerSideProps({ params }) {
+//   const { pageCategory, category } = params;
 
-  const query = qs.stringify(
-    {
-      filters: {
-        pageCategory: pageCategory,
-        $or: [
-          {
-            category: {
-              $eqi: category,
-            },
-          },
-          {
-            equipmentCategory: {
-              $eqi: category,
-            },
-          },
-        ],
-        showOnCategoryBanner: true,
-      },
-      populate: {
-        image: true,
-      },
-    },
-    {
-      encodeValuesOnly: true,
-    },
-  );
+//   const query = qs.stringify(
+//     {
+//       filters: {
+//         pageCategory: pageCategory,
+//         $or: [
+//           {
+//             category: {
+//               $eqi: category,
+//             },
+//           },
+//           {
+//             equipmentCategory: {
+//               $eqi: category,
+//             },
+//           },
+//         ],
+//         showOnCategoryBanner: true,
+//       },
+//       populate: {
+//         image: true,
+//       },
+//     },
+//     {
+//       encodeValuesOnly: true,
+//     },
+//   );
 
-  const pageBannerResponse = await fetch(`${process.env.API_URL}/api/products?${query}`);
+//   const pageBannerResponse = await fetch(`${process.env.API_URL}/api/products?${query}`);
 
-  const pageBannerResponseJson = await pageBannerResponse.json();
+//   const pageBannerResponseJson = await pageBannerResponse.json();
 
-  return { props: { pageCategory, category, pageBannerData: pageBannerResponseJson.data } };
-}
+//   return { props: { pageCategory, category, pageBannerData: pageBannerResponseJson.data } };
+// }
