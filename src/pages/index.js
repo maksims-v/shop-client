@@ -48,21 +48,6 @@ const Home = ({
 
 export default Home;
 
-export const getStaticProps = async () => {
-  const response = await fetch(`${process.env.API_URL}/api/layout-header`);
-  const data = await response.json();
-
-  if (!data) {
-    return {
-      notFound: true,
-    };
-  }
-
-  return {
-    props: { pages: data },
-  };
-};
-
 // export async function getServerSideProps() {
 //   try {
 //     const query = qs.stringify({

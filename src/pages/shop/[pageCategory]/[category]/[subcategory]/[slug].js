@@ -52,8 +52,8 @@ const onHoverLine = {
 
 const ItemDetails = () => {
   const dispatch = useDispatch();
-  const router = useRouter();
 
+  const router = useRouter();
   const { category, pageCategory, subcategory, slug } = router.query;
 
   const basket = useSelector((state) => state.shoppingCartSlice.basket);
@@ -452,25 +452,6 @@ const ItemDetails = () => {
 };
 
 export default ItemDetails;
-
-// export async function getServerSideProps({ params, query }) {
-//   const { slug, pageCategory, category, subcategory } = params;
-
-//   const slugQuery = qs.stringify({
-//     filters: { slug: value.slug },
-//     populate: { image: true, size: true, color: true, id: true },
-//   });
-
-//   const response = await fetch(`${process.env.API_URL}/api/products?${slugQuery}`);
-
-//   if (!response.ok) {
-//     throw new Error('Server Error!');
-//   }
-
-//   const data = response.json();
-
-//   return { props: { slug, pageCategory, category, subcategory } };
-// }
 
 const Alert = forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;

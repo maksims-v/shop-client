@@ -15,6 +15,7 @@ import SortingByPriceAndName from 'components/SortingByPriceAndName';
 import Link from 'next/link';
 import PageCategoryMobileVersion from 'components/mobileVersionPage/PageCategoryMobileVersion';
 import ProductPageBanner from 'components/ProductPageBanner';
+import { useRouter } from 'next/router';
 
 const onHoverLine = {
   display: 'inline-block',
@@ -37,8 +38,12 @@ const onHoverLine = {
   },
 };
 
-const Index = ({ pageCategory, pageBannerdata, pageData }) => {
+const Index = ({ pageBannerdata }) => {
   const dispatch = useDispatch();
+
+  const router = useRouter();
+  const { pageCategory } = router.query;
+
   const searchFlag = useSelector((state) => state.searchPageSlice.searchFlag);
   const currentPage = useSelector((state) => state.searchPageSlice.currentPage);
   const sortValue = useSelector((state) => state.searchPageSlice.sortValue);
@@ -116,44 +121,31 @@ const Index = ({ pageCategory, pageBannerdata, pageData }) => {
 
 export default Index;
 
-// export async function getStaticProps({ params }) {
-//   const { pageCategory } = params;
+export async function getServerSideProps({ params }) {
+  const { pageCategory } = params;
 
-//   //   // const query = qs.stringify(
-//   //   //   {
-//   //   //     filters: {
-//   //   //       pageCategory: pageCategory,
-//   //   //       showOnBanner: true,
-//   //   //     },
-//   //   //     populate: {
-//   //   //       image: true,
-//   //   //     },
-//   //   //   },
-//   //   //   {
-//   //   //     encodeValuesOnly: true,
-//   //   //   },
-//   //   // );
+  const query = qs.stringify(
+    {
+      filters: {
+        pageCategory: pageCategory,
+        showOnBanner: true,
+      },
+      populate: {
+        image: true,
+      },
+    },
+    {
+      encodeValuesOnly: true,
+    },
+  );
 
-//   const response = await fetch(
-//     `${process.env.API_URL}/api/products/search?search=&pmin=1&pmax=9999&brands=&sale=&category=&pageCategory=${pageCategory}&subcat=&size=&currentPage=1&sorting=Sort By&clearance=false&newproduct=false`,
-//   );
-//   const pageResponseJson = await response.json();
+  const pageBannerResponse = await fetch(`${process.env.API_URL}/api/products?${query}`);
 
-//   //   // const pageBannerResponse = await fetch(`${process.env.API_URL}/api/products?${query}`);
+  const pageBannerResponseJson = await pageBannerResponse.json();
 
-//   //   // const pageBannerResponseJson = await pageBannerResponse.json();
-
-//   if (!data) {
-//     return {
-//       notFound: true,
-//     };
-//   }
-
-//   return {
-//     props: {
-//       pageData: pageResponseJson,
-//       pageCategory,
-//       // pageBannerdata: pageBannerResponseJson.data,
-//     },
-//   };
-// }
+  return {
+    props: {
+      pageBannerdata: pageBannerResponseJson.data,
+    },
+  };
+}

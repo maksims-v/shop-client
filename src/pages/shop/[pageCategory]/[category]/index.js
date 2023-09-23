@@ -14,6 +14,7 @@ import SortingByPriceAndName from 'components/SortingByPriceAndName';
 import Link from 'next/link';
 import CategoryMobileVersion from '../../../../../components/mobileVersionPage/CategoryMobileVersion';
 import ProductPageBanner from 'components/ProductPageBanner';
+import { useRouter } from 'next/router';
 
 const onHoverLine = {
   display: 'inline-block',
@@ -36,8 +37,12 @@ const onHoverLine = {
   },
 };
 
-const Category = ({ pageCategory, category, pageBannerData }) => {
+const Category = ({ pageBannerData }) => {
   const dispatch = useDispatch();
+
+  const router = useRouter();
+  const { category, pageCategory } = router.query;
+
   const searchFlag = useSelector((state) => state.searchPageSlice.searchFlag);
   const currentPage = useSelector((state) => state.searchPageSlice.currentPage);
   const sortValue = useSelector((state) => state.searchPageSlice.sortValue);
@@ -123,35 +128,6 @@ export default Category;
 
 // export async function getServerSideProps({ params }) {
 //   const { pageCategory, category } = params;
-
-//   const query = qs.stringify(
-//     {
-//       filters: {
-//         pageCategory: pageCategory,
-//         $or: [
-//           {
-//             category: {
-//               $eqi: category,
-//             },
-//           },
-//           {
-//             equipmentCategory: {
-//               $eqi: category,
-//             },
-//           },
-//         ],
-//         showOnCategoryBanner: true,
-//       },
-//       populate: {
-//         image: true,
-//       },
-//     },
-//     {
-//       encodeValuesOnly: true,
-//     },
-//   );
-
-//   const pageBannerResponse = await fetch(`${process.env.API_URL}/api/products?${query}`);
 
 //   const pageBannerResponseJson = await pageBannerResponse.json();
 

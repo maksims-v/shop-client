@@ -11,6 +11,7 @@ import PageCategoryFilter from 'components/filtersComponents/PageCategoryFilter'
 import SortingByPriceAndName from 'components/SortingByPriceAndName';
 import Link from 'next/link';
 import SubCategoryMobileVersion from 'components/mobileVersionPage/SubCategoryMobileVersion';
+import { useRouter } from 'next/router';
 
 const onHoverLine = {
   display: 'inline-block',
@@ -33,8 +34,12 @@ const onHoverLine = {
   },
 };
 
-const SubCategory = ({ pageCategory, category, subcategory }) => {
+const SubCategory = () => {
   const dispatch = useDispatch();
+
+  const router = useRouter();
+  const { category, pageCategory, subcategory } = router.query;
+
   const searchFlag = useSelector((state) => state.searchPageSlice.searchFlag);
   const currentPage = useSelector((state) => state.searchPageSlice.currentPage);
   const sortValue = useSelector((state) => state.searchPageSlice.sortValue);
@@ -114,9 +119,3 @@ const SubCategory = ({ pageCategory, category, subcategory }) => {
 };
 
 export default SubCategory;
-
-// export async function getServerSideProps({ params }) {
-//   const { pageCategory, category, subcategory } = params;
-
-//   return { props: { pageCategory, category, subcategory } };
-// }
