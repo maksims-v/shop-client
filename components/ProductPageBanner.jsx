@@ -2,7 +2,9 @@ import { Box, CardActionArea, CardMedia, CardContent, Typography, Card } from '@
 import Link from 'next/link';
 
 const ProductPageBanner = ({ pageBannerdata }) => {
-  const bannerItems = pageBannerdata?.map((item) => {
+  console.log(pageBannerdata);
+
+  const bannerItems = pageBannerdata?.data?.map((item) => {
     return (
       <Box
         key={item.id}

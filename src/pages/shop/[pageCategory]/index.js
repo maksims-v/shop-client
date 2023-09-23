@@ -16,6 +16,7 @@ import Link from 'next/link';
 import PageCategoryMobileVersion from 'components/mobileVersionPage/PageCategoryMobileVersion';
 import ProductPageBanner from 'components/ProductPageBanner';
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 
 const onHoverLine = {
   display: 'inline-block',
@@ -40,6 +41,7 @@ const onHoverLine = {
 
 const Index = ({ pageBannerdata }) => {
   const dispatch = useDispatch();
+  const [bannerdata, setBannerData] = useState();
 
   const router = useRouter();
   const { pageCategory } = router.query;
@@ -58,8 +60,30 @@ const Index = ({ pageBannerdata }) => {
     dispatch(clearAllFilters());
   }, [pageCategory]);
 
+  async function getBanner() {
+    const query = qs.stringify(
+      {
+        filters: {
+          pageCategory: pageCategory,
+          showOnBanner: true,
+        },
+        populate: {
+          image: true,
+        },
+      },
+      {
+        encodeValuesOnly: true,
+      },
+    );
+
+    const pageBannerResponse = await fetch(`${process.env.API_URL}/api/products?${query}`);
+    const pageBannerResponseJson = await pageBannerResponse.json();
+    setBannerData(pageBannerResponseJson);
+  }
+
   useEffect(() => {
     dispatch(search({ pageCategory }));
+    getBanner();
   }, [searchFlag, pageCategory]);
 
   const handleChange = (event) => {
@@ -111,7 +135,7 @@ const Index = ({ pageBannerdata }) => {
               <SortingByPriceAndName />
             </Box>
           )}
-          <ProductPageBanner pageBannerdata={pageBannerdata} />
+          <ProductPageBanner pageBannerdata={bannerdata} />
           <ProductList />
         </Box>
       </Box>
@@ -120,32 +144,3 @@ const Index = ({ pageBannerdata }) => {
 };
 
 export default Index;
-
-export async function getServerSideProps({ params }) {
-  const { pageCategory } = params;
-
-  const query = qs.stringify(
-    {
-      filters: {
-        pageCategory: pageCategory,
-        showOnBanner: true,
-      },
-      populate: {
-        image: true,
-      },
-    },
-    {
-      encodeValuesOnly: true,
-    },
-  );
-
-  const pageBannerResponse = await fetch(`${process.env.API_URL}/api/products?${query}`);
-
-  const pageBannerResponseJson = await pageBannerResponse.json();
-
-  return {
-    props: {
-      pageBannerdata: pageBannerResponseJson.data,
-    },
-  };
-}
