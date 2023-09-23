@@ -156,7 +156,7 @@ const ItemDetails = ({ slug, pageCategory, category, subcategory }) => {
           underline="hover"
           color="inherit"
           href={`/shop/${productData?.attributes?.pageCategory}`}>
-          <Box sx={onHoverLine}> {pageCategory.toUpperCase()}</Box>
+          <Box sx={onHoverLine}> {pageCategory?.toUpperCase()}</Box>
         </Link>
         <Link
           underline="hover"
@@ -166,7 +166,7 @@ const ItemDetails = ({ slug, pageCategory, category, subcategory }) => {
               productData?.attributes?.equipmentCategory) ||
             (productData?.attributes?.category !== 'null' && productData?.attributes?.category)
           }`}>
-          <Box sx={onHoverLine}>{category.toUpperCase()}</Box>
+          <Box sx={onHoverLine}>{category?.toUpperCase()}</Box>
         </Link>
         <Link
           underline="hover"
@@ -193,7 +193,7 @@ const ItemDetails = ({ slug, pageCategory, category, subcategory }) => {
             (productData?.attributes?.accessoriesCategory !== 'null' &&
               productData?.attributes?.accessoriesCategory)
           }`}>
-          <Box sx={onHoverLine}>{subcategory.toUpperCase()}</Box>
+          <Box sx={onHoverLine}>{subcategory?.toUpperCase()}</Box>
         </Link>
       </Breadcrumbs>
       <Box display="flex" flexWrap="wrap" columnGap="40px">
