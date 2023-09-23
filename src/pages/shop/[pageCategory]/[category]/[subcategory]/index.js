@@ -115,8 +115,8 @@ const SubCategory = ({ pageCategory, category, subcategory }) => {
 
 export default SubCategory;
 
-export async function getServerSideProps({ params }) {
-  const { pageCategory, category, subcategory } = params;
+// export async function getServerSideProps({ params }) {
+//   const { pageCategory, category, subcategory } = params;
 
-  return { props: { pageCategory, category, subcategory } };
-}
+//   return { props: { pageCategory, category, subcategory } };
+// }

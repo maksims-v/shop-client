@@ -449,11 +449,11 @@ const ItemDetails = ({ slug, pageCategory, category, subcategory }) => {
 
 export default ItemDetails;
 
-export async function getServerSideProps({ params, query }) {
-  const { slug, pageCategory, category, subcategory } = params;
+// export async function getServerSideProps({ params, query }) {
+//   const { slug, pageCategory, category, subcategory } = params;
 
-  return { props: { slug, pageCategory, category, subcategory } };
-}
+//   return { props: { slug, pageCategory, category, subcategory } };
+// }
 
 const Alert = forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
