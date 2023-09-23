@@ -28,6 +28,15 @@ import { getProductData } from '@/state/productPageSlice';
 import ProductPageMobileVersion from 'components/mobileVersionPage/ProductPageMobileVersion';
 import { useRouter } from 'next/router';
 
+export async function getServerSideProps() {
+  // Fetch data from external API
+  const res = await fetch(`${process.env.API_URL}/api/layout-header`);
+  const data = await res.json();
+
+  // Pass data to the page via props
+  return { props: { data } };
+}
+
 const onHoverLine = {
   display: 'inline-block',
   position: 'relative',
@@ -50,8 +59,10 @@ const onHoverLine = {
   },
 };
 
-const ItemDetails = () => {
+const ItemDetails = ({ data }) => {
   const dispatch = useDispatch();
+
+  console.log(data);
 
   const router = useRouter();
   const { category, pageCategory, subcategory, slug } = router.query;

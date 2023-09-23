@@ -35,7 +35,6 @@ export const footerDataSlice = createSlice({
   initialState,
   reducers: {
     setFooterData(state, action) {
-      console.log(action.payload?.data[0]?.attributes);
       state.data = action.payload?.data[0]?.attributes;
     },
   },
