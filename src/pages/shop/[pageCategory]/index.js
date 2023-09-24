@@ -2,7 +2,7 @@ const qs = require('qs');
 import { Box, Breadcrumbs, Typography } from '@mui/material';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { search, clearAllFilters, setDiscounts } from '@/state/searchPageSlice';
+import { search, clearAllFilters } from '@/state/searchPageSlice';
 import ProductList from 'components/ProductList';
 import SaleFilter from 'components/filtersComponents/SaleFilter';
 import CategoryFilter from 'components/filtersComponents/CategoryFilter';
@@ -15,8 +15,6 @@ import SortingByPriceAndName from 'components/SortingByPriceAndName';
 import Link from 'next/link';
 import PageCategoryMobileVersion from 'components/mobileVersionPage/PageCategoryMobileVersion';
 import ProductPageBanner from 'components/ProductPageBanner';
-import { useRouter } from 'next/router';
-import { useState } from 'react';
 
 const onHoverLine = {
   display: 'inline-block',
@@ -58,12 +56,7 @@ const Index = ({ pageCategory, pageBannerdata }) => {
 
   useEffect(() => {
     dispatch(search({ pageCategory }));
-    getBanner();
   }, [searchFlag, pageCategory]);
-
-  const handleChange = (event) => {
-    dispatch(setDiscounts(event.target.name));
-  };
 
   const clearFilters = () => {
     dispatch(clearAllFilters());
@@ -91,7 +84,7 @@ const Index = ({ pageCategory, pageBannerdata }) => {
         <Box flex="1 1 10%">
           <PageCategoryFilter />
           <PriceSlider />
-          <SaleFilter handleChange={handleChange} />
+          <SaleFilter />
           <CategoryFilter />
           <SubCategoryFilter />
           <BrandFilter />

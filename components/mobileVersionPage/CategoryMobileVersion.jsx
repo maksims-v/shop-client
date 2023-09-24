@@ -5,7 +5,6 @@ import MobileFilters from 'components/filtersComponents/MobileFilters';
 import MobileSearchChip from 'components/filtersComponents/MobileSearchChip';
 
 const CategoryMobileVersion = ({ pageCategory, category, clearFilters }) => {
-  console.log('hai');
   return (
     <Box>
       <Breadcrumbs aria-label="breadcrumb" sx={{ mb: '10px', mt: '20px', pl: '5px' }}>

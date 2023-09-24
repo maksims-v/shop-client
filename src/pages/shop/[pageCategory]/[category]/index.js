@@ -2,7 +2,7 @@ const qs = require('qs');
 import { Box, Breadcrumbs, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { search, clearAllFilters, setDiscounts } from '@/state/searchPageSlice';
+import { search, clearAllFilters } from '@/state/searchPageSlice';
 import ProductList from 'components/ProductList';
 import SaleFilter from 'components/filtersComponents/SaleFilter';
 import SubCategoryFilter from 'components/filtersComponents/SubCategoryFilter';
@@ -97,10 +97,6 @@ const Category = () => {
     getBanner();
   }, [searchFlag, pageCategory, category]);
 
-  const handleChange = (event) => {
-    dispatch(setDiscounts(event.target.name));
-  };
-
   const clearFilters = () => {
     dispatch(clearAllFilters());
     dispatch(search({ pageCategory, category }));
@@ -110,7 +106,6 @@ const Category = () => {
     <CategoryMobileVersion
       pageCategory={pageCategory}
       category={category}
-      handleChange={handleChange}
       clearFilters={clearFilters}
     />
   ) : (
@@ -135,7 +130,7 @@ const Category = () => {
         <Box flex="1 1 10%">
           <PageCategoryFilter />
           <PriceSlider />
-          <SaleFilter handleChange={handleChange} />
+          <SaleFilter />
           <SubCategoryFilter />
           <BrandFilter />
           <SizesFilter />
