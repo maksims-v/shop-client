@@ -29,11 +29,9 @@ import ProductPageMobileVersion from 'components/mobileVersionPage/ProductPageMo
 import { useRouter } from 'next/router';
 
 export async function getServerSideProps() {
-  // Fetch data from external API
   const res = await fetch(`${process.env.API_URL}/api/layout-header`);
   const data = await res.json();
 
-  // Pass data to the page via props
   return { props: { data } };
 }
 
@@ -61,8 +59,6 @@ const onHoverLine = {
 
 const ItemDetails = ({ data }) => {
   const dispatch = useDispatch();
-
-  console.log(data);
 
   const router = useRouter();
   const { category, pageCategory, subcategory, slug } = router.query;

@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Box, IconButton, Badge, Paper, InputBase, Divider } from '@mui/material';
-import { PersonOutline, ShoppingBagOutlined } from '@mui/icons-material';
+import PersonOutline from '@mui/icons-material/PersonOutline';
+import ShoppingBagOutlined from '@mui/icons-material/ShoppingBagOutlined';
 import SettingsIcon from '@mui/icons-material/Settings';
 import SearchIcon from '@mui/icons-material/Search';
 import LogoutIcon from '@mui/icons-material/Logout';
