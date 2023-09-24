@@ -39,39 +39,14 @@ const onHoverLine = {
   },
 };
 
-const Index = () => {
+const Index = ({ pageCategory, pageBannerdata }) => {
   const dispatch = useDispatch();
-  const [bannerdata, setBannerData] = useState();
-
-  const router = useRouter();
-  const { pageCategory } = router.query;
 
   const searchFlag = useSelector((state) => state.searchPageSlice.searchFlag);
   const currentPage = useSelector((state) => state.searchPageSlice.currentPage);
   const sortValue = useSelector((state) => state.searchPageSlice.sortValue);
   const total = useSelector((state) => state.searchPageSlice.metaData.total);
   const mobile = useSelector((state) => state.searchPageSlice.mobile);
-
-  async function getBanner() {
-    const query = qs.stringify(
-      {
-        filters: {
-          pageCategory: pageCategory,
-          showOnBanner: true,
-        },
-        populate: {
-          image: true,
-        },
-      },
-      {
-        encodeValuesOnly: true,
-      },
-    );
-
-    const pageBannerResponse = await fetch(`${process.env.API_URL}/api/products?${query}`);
-    const pageBannerResponseJson = await pageBannerResponse.json();
-    setBannerData(pageBannerResponseJson);
-  }
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -135,7 +110,7 @@ const Index = () => {
               <SortingByPriceAndName />
             </Box>
           )}
-          <ProductPageBanner pageBannerdata={bannerdata} />
+          <ProductPageBanner pageBannerdata={pageBannerdata} />
           <ProductList />
         </Box>
       </Box>
@@ -144,3 +119,33 @@ const Index = () => {
 };
 
 export default Index;
+
+export async function getServerSideProps({ params }) {
+  const { pageCategory } = params;
+
+  const query = qs.stringify(
+    {
+      filters: {
+        pageCategory: pageCategory,
+        showOnBanner: true,
+      },
+      populate: {
+        image: true,
+      },
+    },
+    {
+      encodeValuesOnly: true,
+    },
+  );
+
+  const pageBannerResponse = await fetch(`${process.env.API_URL}/api/products?${query}`);
+
+  const pageBannerResponseJson = await pageBannerResponse.json();
+
+  return {
+    props: {
+      pageCategory,
+      pageBannerdata: pageBannerResponseJson.data,
+    },
+  };
+}
