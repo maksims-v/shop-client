@@ -40,7 +40,7 @@ const MobileFilters = ({ newSearch, clearFilters }) => {
 
   const clear = () => {
     clearFilters();
-    if (asPath == '/search' || '/search/col') {
+    if (asPath == '/search' || asPath == '/search/col') {
       dispatch(search({ pageCategory: 'all' }));
     }
     setResetPriceSlider(!resetPriceSlider);
