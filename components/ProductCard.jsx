@@ -24,7 +24,7 @@ const ProductCard = ({ item, clearence, section }) => {
         }/${item?.slug}`}>
         {section !== 'brandSection' ? (
           <CardActionArea
-            sx={{ height: mobile ? 281 : 355, display: 'flex', flexDirection: 'column' }}>
+            sx={{ height: mobile ? 290 : 355, display: 'flex', flexDirection: 'column' }}>
             <CardMedia
               component="img"
               sx={{ p: '0px 2px', flex: '1 1 auto' }}
