@@ -33,7 +33,7 @@ const SectionBrands = ({ sectionBrandData }) => {
               <img
                 alt="banner"
                 style={{ width: '100%', objectFit: 'cover', height: '720px' }}
-                src={`${process.env.API_URL}${sectionBrandData?.data[0]?.attributes?.brandSection.image?.data?.attributes?.url}`}
+                src={`${sectionBrandData?.data[0]?.attributes?.brandSection.image?.data?.attributes?.url}`}
               />
             </Link>
           </Box>

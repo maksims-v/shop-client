@@ -31,7 +31,7 @@ const BasketItem = ({ item, deleteProduct, increase, decrease }) => {
               (item?.item?.accessoriesCategory !== 'null' && item?.item?.accessoriesCategory)
             }/${item?.item?.slug}`}>
             <img
-              src={`http://localhost:1337` + item.item.image.data[0].attributes.formats.small.url}
+              src={item.item.image.data[0].attributes.formats.small.url}
               alt="alt"
               width="150px"
               height="164px"

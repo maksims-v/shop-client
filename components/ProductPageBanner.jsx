@@ -2,9 +2,7 @@ import { Box, CardActionArea, CardMedia, CardContent, Typography, Card } from '@
 import Link from 'next/link';
 
 const ProductPageBanner = ({ pageBannerdata }) => {
-  console.log(pageBannerdata);
-
-  const bannerItems = pageBannerdata?.data?.map((item) => {
+  const bannerItems = pageBannerdata?.map((item) => {
     return (
       <Box
         key={item.id}
@@ -36,7 +34,7 @@ const ProductPageBanner = ({ pageBannerdata }) => {
             <CardMedia
               sx={{ height: '100%', width: '220px' }}
               component="img"
-              image={`${process.env.API_URL}${item?.attributes?.image?.data[0]?.attributes?.formats?.medium?.url}`}
+              image={`${item?.attributes?.image?.data[0]?.attributes?.formats?.medium?.url}`}
               alt="img"
             />
             <CardContent>

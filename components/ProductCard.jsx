@@ -37,7 +37,7 @@ const ProductCard = ({ item, clearence, section }) => {
             <CardMedia
               component="img"
               sx={{ p: '0px 5px' }}
-              image={`${process.env.API_URL}${
+              image={`${
                 clearence || section == 'brandSection'
                   ? item.image?.data[0]?.attributes?.formats?.medium?.url
                   : item?.image
@@ -106,7 +106,7 @@ const ProductCard = ({ item, clearence, section }) => {
             <CardMedia
               component="img"
               sx={{ p: '0px 5px' }}
-              image={`${process.env.API_URL}${
+              image={`${
                 clearence || section == 'brandSection'
                   ? item.image?.data[0]?.attributes?.formats?.medium?.url
                   : item?.image

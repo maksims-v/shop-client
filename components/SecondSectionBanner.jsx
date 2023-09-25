@@ -62,7 +62,7 @@ const SecondSectionBanner = ({ secondBannerData }) => {
             <img
               alt="banner"
               style={{ height: '450px', objectFit: 'cover', width: '100%' }}
-              src={`${process.env.API_URL}${item?.attributes?.image?.data?.attributes?.url}`}
+              src={`${item?.attributes?.image?.data?.attributes?.url}`}
             />
           </Link>
         </Box>

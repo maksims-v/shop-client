@@ -48,7 +48,7 @@ const SectionCategory = ({ sectionCategoryData }) => {
           </Box>
           <Box key={item.img} sx={{ '&:hover': { scale: '1.3', transition: '1.5s' } }}>
             <img
-              src={`${process.env.API_URL}${item.image?.data?.attributes?.url}`}
+              src={`${item.image?.data?.attributes?.url}`}
               alt={item.title}
               style={{ height: mobile ? '300px' : '200px', width: '200px', objectFit: 'cover' }}
               loading="lazy"

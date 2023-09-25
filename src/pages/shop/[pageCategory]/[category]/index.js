@@ -14,7 +14,6 @@ import SortingByPriceAndName from 'components/SortingByPriceAndName';
 import Link from 'next/link';
 import CategoryMobileVersion from '../../../../../components/mobileVersionPage/CategoryMobileVersion';
 import ProductPageBanner from 'components/ProductPageBanner';
-import { useRouter } from 'next/router';
 
 const onHoverLine = {
   display: 'inline-block',
@@ -37,52 +36,14 @@ const onHoverLine = {
   },
 };
 
-const Category = () => {
+const Category = ({ pageCategory, category, pageBannerData }) => {
   const dispatch = useDispatch();
-  const [bannerdata, setBannerData] = useState();
-
-  const router = useRouter();
-  const { category, pageCategory } = router.query;
 
   const searchFlag = useSelector((state) => state.searchPageSlice.searchFlag);
   const currentPage = useSelector((state) => state.searchPageSlice.currentPage);
   const sortValue = useSelector((state) => state.searchPageSlice.sortValue);
   const total = useSelector((state) => state.searchPageSlice.metaData.total);
   const mobile = useSelector((state) => state.searchPageSlice.mobile);
-
-  async function getBanner() {
-    const query = qs.stringify(
-      {
-        filters: {
-          pageCategory: pageCategory,
-          $or: [
-            {
-              category: {
-                $eqi: category,
-              },
-            },
-            {
-              equipmentCategory: {
-                $eqi: category,
-              },
-            },
-          ],
-          showOnCategoryBanner: true,
-        },
-        populate: {
-          image: true,
-        },
-      },
-      {
-        encodeValuesOnly: true,
-      },
-    );
-
-    const pageBannerResponse = await fetch(`${process.env.API_URL}/api/products?${query}`);
-
-    const pageBannerResponseJson = await pageBannerResponse.json();
-    setBannerData(pageBannerResponseJson);
-  }
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -94,7 +55,6 @@ const Category = () => {
 
   useEffect(() => {
     dispatch(search({ pageCategory, category }));
-    getBanner();
   }, [searchFlag, pageCategory, category]);
 
   const clearFilters = () => {
@@ -147,7 +107,7 @@ const Category = () => {
               <SortingByPriceAndName />
             </Box>
           )}
-          <ProductPageBanner pageBannerdata={bannerdata} />
+          <ProductPageBanner pageBannerdata={pageBannerData} />
           <ProductList />
         </Box>
       </Box>
@@ -156,3 +116,40 @@ const Category = () => {
 };
 
 export default Category;
+
+export async function getServerSideProps({ params }) {
+  const { pageCategory, category } = params;
+
+  const query = qs.stringify(
+    {
+      filters: {
+        pageCategory: pageCategory,
+        $or: [
+          {
+            category: {
+              $eqi: category,
+            },
+          },
+          {
+            equipmentCategory: {
+              $eqi: category,
+            },
+          },
+        ],
+        showOnCategoryBanner: true,
+      },
+      populate: {
+        image: true,
+      },
+    },
+    {
+      encodeValuesOnly: true,
+    },
+  );
+
+  const pageBannerResponse = await fetch(`${process.env.API_URL}/api/products?${query}`);
+
+  const pageBannerResponseJson = await pageBannerResponse.json();
+
+  return { props: { pageCategory, category, pageBannerData: pageBannerResponseJson.data } };
+}

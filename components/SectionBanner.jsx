@@ -52,7 +52,7 @@ const SectionBanner = ({ bannerData }) => {
               objectFit: 'cover',
               height: mobile ? '300px' : 'auto',
             }}
-            src={`${process.env.API_URL}${bannerData[0]?.attributes?.image?.data?.attributes?.url}`}
+            src={`${bannerData[0]?.attributes?.image?.data?.attributes?.url}`}
           />
         </Link>
       </Box>

@@ -178,10 +178,7 @@ const Basket = () => {
                         item?.item?.accessoriesCategory)
                     }/${item?.item?.slug}`}>
                     <img
-                      src={
-                        `http://localhost:1337` +
-                        item.item.image.data[0].attributes.formats?.small.url
-                      }
+                      src={item.item.image.data[0].attributes.formats?.small.url}
                       alt="alt"
                       width="70px"
                       height="84px"

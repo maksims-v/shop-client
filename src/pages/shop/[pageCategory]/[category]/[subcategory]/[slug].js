@@ -28,13 +28,6 @@ import { getProductData } from '@/state/productPageSlice';
 import ProductPageMobileVersion from 'components/mobileVersionPage/ProductPageMobileVersion';
 import { useRouter } from 'next/router';
 
-export async function getServerSideProps() {
-  const res = await fetch(`${process.env.API_URL}/api/layout-header`);
-  const data = await res.json();
-
-  return { props: { data } };
-}
-
 const onHoverLine = {
   display: 'inline-block',
   position: 'relative',
@@ -57,7 +50,7 @@ const onHoverLine = {
   },
 };
 
-const ItemDetails = ({ data }) => {
+const ItemDetails = () => {
   const dispatch = useDispatch();
 
   const router = useRouter();
@@ -142,7 +135,7 @@ const ItemDetails = ({ data }) => {
 
   const galleryArr = productData?.attributes?.image?.data
     ? productData.attributes?.image?.data?.map((item) => ({
-        src: `${process.env.API_URL}${item?.attributes?.formats?.small?.url}`,
+        src: `${item?.attributes?.formats?.small?.url}`,
         width: 1,
         height: 1,
       }))
@@ -220,7 +213,7 @@ const ItemDetails = ({ data }) => {
               alt={'alt'}
               width="100%"
               height="500px"
-              src={`${process.env.API_URL}${productData?.attributes?.image?.data[currentImage]?.attributes?.url}`}
+              src={`${productData?.attributes?.image?.data[currentImage]?.attributes?.url}`}
               style={{ objectFit: 'contain' }}
             />
             <Box>
@@ -242,7 +235,7 @@ const ItemDetails = ({ data }) => {
                       views={
                         productData?.attributes.image?.data
                           ? productData.attributes.image.data?.map((item, i) => ({
-                              src: `${process.env.API_URL}${item?.attributes?.url}`,
+                              src: `${item?.attributes?.url}`,
                             }))
                           : [{ src: '' }]
                       }
@@ -318,7 +311,7 @@ const ItemDetails = ({ data }) => {
                       <CardMedia
                         component="img"
                         height="100"
-                        image={`${process.env.API_URL}${item.attributes.image.data[0].attributes.formats.thumbnail.url}`}
+                        image={`${item.attributes.image.data[0].attributes.formats.thumbnail.url}`}
                         alt="Paella dish"
                       />
                     </CardActionArea>

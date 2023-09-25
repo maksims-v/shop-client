@@ -4,7 +4,6 @@ import PopularCategorySectionItem from './PopularCategorySectionItem';
 
 const PopularCategorySection = ({ sectionPopularCategoryData }) => {
   const mobile = useSelector((state) => state.searchPageSlice.mobile);
-
   return (
     <Box m={mobile ? '0 auto' : '0 auto 60px auto'} width="100%" p={mobile ? '0px' : '0px 5px'}>
       {!mobile && (

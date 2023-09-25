@@ -22,7 +22,7 @@ const PopularCategorySectionItem = ({ item }) => {
         <Box sx={{ '&:hover': { scale: '1.1', transition: '0.9s' } }}>
           <Box sx={{ '&:hover': { scale: '1.1', transition: '0.9s' } }}>
             <img
-              src={`${process.env.API_URL}${item.image?.data?.attributes?.url}`}
+              src={`${item.image?.data?.attributes?.url}`}
               alt={item.title}
               style={{ objectFit: 'cover' }}
               loading="lazy"
