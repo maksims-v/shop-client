@@ -28,7 +28,6 @@ const SubCategoryMobileVersion = ({ pageCategory, category, subcategory, clearFi
       </Breadcrumbs>
 
       <Box display="flex" alignContent="center" flexDirection="column">
-        <MobileSearchChip />
         <MobileFilters clearFilters={clearFilters} />
         <ProductList />
       </Box>

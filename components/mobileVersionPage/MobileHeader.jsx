@@ -23,7 +23,6 @@ const MobileHeader = () => {
   const [openModalAuth, setOpenModalAuth] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchValue, setSearchValue] = useState('');
-  const [badgeCount, setBadgeCount] = useState(1);
   const [openSearchMenu, setOpenSearchMenu] = useState(false);
 
   const handleDrawerToggle = () => {
@@ -96,7 +95,7 @@ const MobileHeader = () => {
                 <Badge
                   badgeContent={basket?.length}
                   color="primary"
-                  invisible={badgeCount === 0}
+                  invisible={basket?.length === 0}
                   sx={{
                     '& .MuiBadge-badge': {
                       top: 6,
@@ -112,7 +111,7 @@ const MobileHeader = () => {
               </Link>
               {isAuth ? (
                 <>
-                  <Link href="/usersdashboard">
+                  <Link href="/userdashboard">
                     <IconButton sx={{ color: 'black' }}>
                       <SettingsIcon />
                     </IconButton>

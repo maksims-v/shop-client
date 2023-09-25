@@ -1,6 +1,6 @@
 const qs = require('qs');
 import { Box, Breadcrumbs, Typography } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { search, clearAllFilters } from '@/state/searchPageSlice';
 import ProductList from 'components/ProductList';

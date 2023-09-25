@@ -8,17 +8,13 @@ import SecondSectionBanner from 'components/SecondSectionBanner';
 import SectionBrands from 'components/SectionBrands';
 
 const Home = ({
-  headerData,
-  footerData,
   bannerData,
   newProductsData,
-  clearenceData,
   sectionCategoryData,
   secondBannerData,
   sectionPopularCategoryData,
   sectionBrandData,
 }) => {
-  console.log(bannerData);
   return (
     <>
       <SectionBanner bannerData={bannerData} />

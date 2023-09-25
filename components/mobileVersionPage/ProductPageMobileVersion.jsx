@@ -55,7 +55,6 @@ const ProductPageMobileVersion = ({
   const dispatch = useDispatch();
 
   const basket = useSelector((state) => state.shoppingCartSlice.basket);
-  const mobile = useSelector((state) => state.searchPageSlice.mobile);
 
   useEffect(() => {
     setData(productData);
@@ -168,11 +167,7 @@ const ProductPageMobileVersion = ({
           items={productData?.attributes?.image?.data?.map((item) => {
             return (
               <Box sx={{ textAlign: 'center' }}>
-                <img
-                  src={`${process.env.API_URL}${item?.attributes?.url}`}
-                  style={{ width: '90%' }}
-                  alt={item.id}
-                />
+                <img src={item?.attributes?.url} style={{ width: '90%' }} alt={item.id} />
               </Box>
             );
           })}
@@ -236,7 +231,7 @@ const ProductPageMobileVersion = ({
                       <CardMedia
                         component="img"
                         height="60"
-                        image={`http://localhost:1337${item.attributes.image.data[0].attributes.formats.thumbnail.url}`}
+                        image={item.attributes.image.data[0].attributes.formats.thumbnail.url}
                         alt="Paella dish"
                       />
                     </CardActionArea>

@@ -5,6 +5,8 @@ import { useRouter } from 'next/router';
 import { register } from '@/state/authSlice';
 
 const Register = () => {
+  const mobile = useSelector((state) => state.searchPageSlice.mobile);
+
   const [userData, setUserData] = useState({
     username: '',
     email: '',

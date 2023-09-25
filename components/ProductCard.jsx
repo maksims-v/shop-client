@@ -1,20 +1,10 @@
-import {
-  Card,
-  CardMedia,
-  CardContent,
-  CardActions,
-  Typography,
-  CardActionArea,
-  Box,
-  Skeleton,
-} from '@mui/material';
+import { Card, CardMedia, CardContent, Typography, CardActionArea, Box } from '@mui/material';
 import FiberNewIcon from '@mui/icons-material/FiberNew';
 import Link from 'next/link';
 import { useSelector } from 'react-redux';
 
 const ProductCard = ({ item, clearence, section }) => {
   const mobile = useSelector((state) => state.searchPageSlice.mobile);
-  const status = useSelector((state) => state.searchPageSlice.status);
 
   return (
     <Card sx={{ maxWidth: 235, boxShadow: 'none' }}>
@@ -33,10 +23,11 @@ const ProductCard = ({ item, clearence, section }) => {
           (item?.accessoriesCategory !== 'null' && item?.accessoriesCategory)
         }/${item?.slug}`}>
         {section !== 'brandSection' ? (
-          <CardActionArea>
+          <CardActionArea
+            sx={{ height: mobile ? 281 : 355, display: 'flex', flexDirection: 'column' }}>
             <CardMedia
               component="img"
-              sx={{ p: '0px 5px' }}
+              sx={{ p: '0px 2px', flex: '1 1 auto' }}
               image={`${
                 clearence || section == 'brandSection'
                   ? item.image?.data[0]?.attributes?.formats?.medium?.url

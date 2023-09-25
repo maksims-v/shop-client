@@ -18,7 +18,7 @@ import SortingByPriceAndName from 'components/SortingByPriceAndName';
 import { useDispatch, useSelector } from 'react-redux';
 import SizesFilter from './SizesFilter';
 import SubCategoryFilter from './SubCategoryFilter';
-import { clearAllFilters, search, inputValue } from '@/state/searchPageSlice';
+import { search, inputValue } from '@/state/searchPageSlice';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import MobileSearchChip from './MobileSearchChip';
@@ -40,7 +40,9 @@ const MobileFilters = ({ newSearch, clearFilters }) => {
 
   const clear = () => {
     clearFilters();
-    dispatch(search({ pageCategory: 'all' }));
+    if (asPath == '/search' || '/search/col') {
+      dispatch(search({ pageCategory: 'all' }));
+    }
     setResetPriceSlider(!resetPriceSlider);
   };
 

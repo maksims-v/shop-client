@@ -45,7 +45,7 @@ const LoginModal = ({ setOpenModalAuth, openModalAuth }) => {
             the forget password link to set a password.
           </DialogContentText>
         </DialogContent>
-        <Box sx={{ margin: '0 auto', gap: '15px', display: 'flex' }}>
+        <Box sx={{ margin: '0 auto', gap: '15px', display: 'flex', p: '0px 5px' }}>
           <TextField
             onChange={(e) => handleChange(e)}
             value={data.identifier}
@@ -62,7 +62,7 @@ const LoginModal = ({ setOpenModalAuth, openModalAuth }) => {
             name="password"
             label="Password"
             variant="outlined"
-            type="text"
+            type="password"
             sx={{ width: '100%' }}
           />
         </Box>
